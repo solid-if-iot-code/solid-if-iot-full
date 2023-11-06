@@ -1,0 +1,25 @@
+{
+  "name": "solid-if-iot-bot-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "npx tsc && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.14.0"
+  },
+  "dependencies": {
+    "@inrupt/solid-client": "^1.25.2",
+    "@inrupt/solid-client-authn-node": "^1.14.0",
+    "@inrupt/solid-client-notifications": "^1.1.2",
+    "@inrupt/vocab-common-rdf": "^1.0.5",
+    "dotenv": "^16.0.3",
+    "mqtt": "^4.3.7"
+  }
+}

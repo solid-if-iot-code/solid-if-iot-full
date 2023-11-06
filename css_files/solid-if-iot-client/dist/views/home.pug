@@ -1,0 +1,38 @@
+html
+  head
+    title="Home"
+  body
+  include navigation.pug
+  h1="Home"
+  p Welcome to the Home page.
+  if sensorData
+    each v, k in sensorData
+      div Sensor Name:
+        span(id=`sensorName-${k}`) #{v.name}
+      div Sensor Uri:
+        span(id=`sensorUri-${k}`) #{v.sensorUri}
+      div Broker Uri:
+        span(id=`brokerUri-${k}`) #{v.brokerUri}
+      div Topics Uri:
+        span(id=`topicUri-${k}`) #{v.topicsUri}
+      if v.subscribeTopics || v.publishTopics
+        if v.subscribeTopics
+          each topic in v.subscribeTopics
+            ul
+              div Subscribed Topic Name:
+                span(class=`topicName ${k} ${topic.topicName}`) #{topic.topicName}
+              div Quality of Service:
+                span(class=`qos ${k} ${topic.topicName}`) #{topic.qos}
+            if topic.status === "unsubscribed"
+              button(type="button" class=`unsubscribed ${k} ${topic.topicName}` onclick="subscribe" id=k) Subscribe
+            else if topic.status === "subscribed"
+              button(type="button" class=`subscribed ${k} ${topic.topicName}` onclick="unsubscribe" id=k) Unsubscribe
+        if v.publishTopics
+          each topic in v.publishTopics
+            div Published Topic Name:
+              ul(id=`topicName-${k}`) #{topic.topicName}
+            if topic.status === "unpublished"
+              button(type="button" class="unpublished" onclick="publish") Publish
+            else if topic.status === "published"
+              button(type="button" class="published" onclick="unpublish") Unpublish
+  script(src="/js/home.js")
